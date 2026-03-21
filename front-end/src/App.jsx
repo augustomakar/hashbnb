@@ -1,18 +1,29 @@
-import Header from "./components/Header";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import axios from "axios";
+import { UserContextProvider } from './contexts/User.Context.jsx'
+import Header from "./components/Header.jsx";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Register from "./pages/Register";
+import Account from "./pages/Account";
+
+axios.defaults.baseURL = import.meta.env.VITE_AXIOS_BASE_URL;
+axios.defaults.withCredentials = true;
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Header />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
-    </BrowserRouter>
+  return (
+    <UserContextProvider>
+      < BrowserRouter >
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/account/:subpage?" element={<Account />} />
+        </Routes>
+      </BrowserRouter >
+    </UserContextProvider>
   );
 }
 
