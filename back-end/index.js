@@ -1,12 +1,12 @@
 import dns from 'dns';
 import express from 'express';
-import dotenv from 'dotenv';
 // import 'dotenv/config'
 // => forma alternatina, não precisa chamar a função
 import { configDotenv } from 'dotenv';
 import { connectDB } from './src/db/connectDB.js';
 import chalk from 'chalk';
-import userRouter from './src/domains/user/user.routes.js';
+import userRouter from './src/domains/user.routes.js';
+import placeRouter from './src/domains/place.routes.js';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
@@ -26,6 +26,7 @@ app.use(
 );
 
 app.use('/users', userRouter);
+app.use('/places', placeRouter);
 
 try {
 	await connectDB();

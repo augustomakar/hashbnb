@@ -14,7 +14,11 @@ const NewPlace = () => {
     const [guests, setGuests] = useState('');
 
     const handleSubmit = (event) => {
-        event.preventDefault();
+        // event.preventDefault();
+
+        // const newPlace = await axios.post('/places',{
+
+        // });
     };
 
     return (
