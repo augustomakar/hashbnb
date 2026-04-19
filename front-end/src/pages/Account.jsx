@@ -1,17 +1,22 @@
-import { Link, useParams } from 'react-router-dom'
-import AccountProfile from '../components/AccountProfile'
-import AccountPlaces from '../components/AccountPlaces'
+import { Link, Navigate, useParams } from 'react-router-dom';
+import AccountProfile from '../components/AccountProfile';
+import AccountPlaces from '../components/AccountPlaces';
+import { useUserContext } from './../contexts/User.Context.jsx';
 
 
 const Account = () => {
 
-    const { subpage } = useParams()
-    const buttonClass = (button) => {
-        let finalClass = "hover:bg-primary-400 rounded-full px-4 py-2 hover:text-white transition cursor-pointer"
+    const { subpage } = useParams();
+    const { user, ready } = useUserContext();
 
-        if (button === subpage) finalClass += " bg-primary-400 text-white"
-        return finalClass
-    }
+    const buttonClass = (button) => {
+        let finalClass = "hover:bg-primary-400 rounded-full px-4 py-2 hover:text-white transition cursor-pointer";
+
+        if (button === subpage) finalClass += " bg-primary-400 text-white";
+        return finalClass;
+    };
+
+    if (!user && ready) return <Navigate to="/login" />;
 
 
     return (
@@ -32,7 +37,7 @@ const Account = () => {
 
             </div >
         </section >
-    )
-}
+    );
+};
 
-export default Account
+export default Account;
